@@ -12,14 +12,20 @@
     ],
     "require": {
         "php": ">=7.0",
-        "viviniko/address": "dev-master",
+        "viviniko/agent": "dev-master",
+        "viviniko/repository": "dev-master",
         "viviniko/support": "dev-master"
     },
-	"autoload": {
+    "autoload": {
         "psr-0": {
             "Viviniko\\Shipping": "src"
         }
     },
+    "laravel": {
+        "providers": [
+            "Viviniko\\Shipping\\ShippingServiceProvider"
+        ]
+    },
     "minimum-stability": "dev",
-	"prefer-stable": true
+    "prefer-stable": true
 }

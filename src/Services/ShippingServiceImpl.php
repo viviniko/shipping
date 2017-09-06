@@ -56,7 +56,7 @@ class ShippingServiceImpl implements ShippingServiceInterface
         $subtotal = $shippingCountryMethod->first_amount;
         if ($weight >= $shippingCountryMethod->first_weight) {
             $weight -= $shippingCountryMethod->first_weight;
-            $subtotal += ($weight % $shippingCountryMethod->step_weight + 1) * $shippingCountryMethod->step_amount;
+            $subtotal += ceil($weight / $shippingCountryMethod->step_weight) * $shippingCountryMethod->step_amount;
         }
 
         $subtotal += $shippingCountryMethod->extra_amount;
