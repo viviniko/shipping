@@ -7,8 +7,6 @@ use Illuminate\Support\Facades\Config;
 
 class EloquentShippingMethod extends SimpleRepository implements ShippingMethodRepository
 {
-    use ValidatesShippingMethodData;
-
     protected $modelConfigKey = 'shipping.shipping_method';
 
     public function findByCountryId($countryId)
