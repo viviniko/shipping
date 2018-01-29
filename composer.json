@@ -13,6 +13,7 @@
     "require": {
         "php": ">=7.0",
         "viviniko/agent": "dev-master",
+        "viviniko/country": "dev-master",
         "viviniko/repository": "dev-master",
         "viviniko/support": "dev-master"
     },
@@ -21,10 +22,12 @@
             "Viviniko\\Shipping": "src"
         }
     },
-    "laravel": {
-        "providers": [
-            "Viviniko\\Shipping\\ShippingServiceProvider"
-        ]
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Viviniko\\Shipping\\ShippingServiceProvider"
+            ]
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true
