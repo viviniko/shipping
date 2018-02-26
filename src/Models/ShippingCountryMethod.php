@@ -2,7 +2,7 @@
 
 namespace Viviniko\Shipping\Models;
 
-use Viviniko\Address\Models\Country;
+use Viviniko\Country\Models\Country;
 use Viviniko\Support\Database\Eloquent\Model;
 
 class ShippingCountryMethod extends Model
