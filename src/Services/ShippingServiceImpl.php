@@ -2,6 +2,7 @@
 
 namespace Viviniko\Shipping\Services;
 
+use Viviniko\Country\Contracts\CountryService;
 use Viviniko\Shipping\Contracts\ShippingService as ShippingServiceInterface;
 use Viviniko\Shipping\Repositories\ShippingMethod\ShippingMethodRepository;
 use Illuminate\Support\Facades\Config;
@@ -11,21 +12,22 @@ class ShippingServiceImpl implements ShippingServiceInterface
 {
     protected $shippingMethods;
 
-    public function __construct(ShippingMethodRepository $shippingMethods)
+    protected $countryService;
+
+    public function __construct(ShippingMethodRepository $shippingMethods, CountryService $countryService)
     {
         $this->shippingMethods = $shippingMethods;
+        $this->countryService = $countryService;
     }
 
     /**
-     * Get shipping methods.
-     *
-     * @param $countryId
-     * @param $weight
-     * @return mixed
+     * {@inheritdoc}
      */
-    public function getShippingMethodsByCountryIdAndWeight($countryId, $weight)
+    public function getShippingMethodsByCountryAndWeight($country, $weight)
     {
-        return $this->shippingMethods->findByCountryId($countryId)->map(function ($item) use ($countryId, $weight) {
+        $countryId = $this->getCountryIdByCode($country);
+
+        return $this->shippingMethods->findByCountry($country)->map(function ($item) use ($countryId, $weight) {
             $item->subtotal = $this->getShippingAmount($item->id, $countryId, $weight);
 
             return $item;
@@ -33,15 +35,12 @@ class ShippingServiceImpl implements ShippingServiceInterface
     }
 
     /**
-     * Get shipping amount.
-     *
-     * @param $shippingMethodId
-     * @param $countryId
-     * @param $weight
-     * @return float
+     * {@inheritdoc}
      */
-    public function getShippingAmount($shippingMethodId, $countryId, $weight)
+    public function getShippingAmount($shippingMethodId, $country, $weight)
     {
+        $countryId = $this->getCountryIdByCode($country);
+
         $shippingCountryMethod = DB::table(Config::get('shipping.shipping_country_method_table'))->where([
             'shipping_method_id' => $shippingMethodId,
             'shipping_country_id' => $countryId,
@@ -63,5 +62,15 @@ class ShippingServiceImpl implements ShippingServiceInterface
         $subtotal *= 1 - $method->discount / 100;
         
         return max(0, $subtotal);
+    }
+
+    protected function getCountryIdByCode($code)
+    {
+        $country = $this->countryService->findByCode($code);
+        if (!$country) {
+            throw new \Exception("Country not found - '$code'");
+        }
+
+        return $country->id;
     }
 }

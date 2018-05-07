@@ -7,19 +7,19 @@ interface ShippingService
     /**
      * Get shipping methods.
      *
-     * @param $countryId
+     * @param $country
      * @param $weight
      * @return mixed
      */
-    public function getShippingMethodsByCountryIdAndWeight($countryId, $weight);
+    public function getShippingMethodsByCountryAndWeight($country, $weight);
 
     /**
      * Get shipping amount.
      *
      * @param $shippingMethodId
-     * @param $countryId
+     * @param $country
      * @param $weight
      * @return float
      */
-    public function getShippingAmount($shippingMethodId, $countryId, $weight);
+    public function getShippingAmount($shippingMethodId, $country, $weight);
 }
