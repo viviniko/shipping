@@ -27,8 +27,8 @@ class ShippingServiceImpl implements ShippingServiceInterface
     {
         $countryId = $this->getCountryIdByCode($country);
 
-        return $this->shippingMethods->findByCountry($country)->map(function ($item) use ($countryId, $weight) {
-            $item->subtotal = $this->getShippingAmount($item->id, $countryId, $weight);
+        return $this->shippingMethods->findByCountryId($countryId)->map(function ($item) use ($country, $weight) {
+            $item->subtotal = $this->getShippingAmount($item->id, $country, $weight);
 
             return $item;
         });
