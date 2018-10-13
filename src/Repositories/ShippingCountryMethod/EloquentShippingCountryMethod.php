@@ -2,15 +2,12 @@
 
 namespace Viviniko\Shipping\Repositories\ShippingCountryMethod;
 
-use Viviniko\Repository\SimpleRepository;
+use Viviniko\Repository\EloquentRepository;
 
-class EloquentShippingCountryMethod extends SimpleRepository implements ShippingCountryMethodRepository
+class EloquentShippingCountryMethod extends EloquentRepository implements ShippingCountryMethodRepository
 {
-    protected $modelConfigKey = 'shipping.shipping_country_method';
-
-    protected $fieldSearchable = [
-        'shipping_method_id',
-        'shipping_country_id',
-        'group'
-    ];
+    public function __construct()
+    {
+        parent::__construct('shipping.shipping_country_method');
+    }
 }

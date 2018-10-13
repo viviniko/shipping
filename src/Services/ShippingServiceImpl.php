@@ -2,7 +2,7 @@
 
 namespace Viviniko\Shipping\Services;
 
-use Viviniko\Country\Contracts\CountryService;
+use Viviniko\Country\Services\CountryService;
 use Viviniko\Shipping\Contracts\ShippingService as ShippingServiceInterface;
 use Viviniko\Shipping\Repositories\ShippingMethod\ShippingMethodRepository;
 use Illuminate\Support\Facades\Config;
