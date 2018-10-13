@@ -1,6 +1,6 @@
 <?php
 
-namespace Viviniko\Shipping\Contracts;
+namespace Viviniko\Shipping\Services;
 
 interface ShippingService
 {
