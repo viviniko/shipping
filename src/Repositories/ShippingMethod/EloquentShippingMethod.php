@@ -9,7 +9,7 @@ class EloquentShippingMethod extends EloquentRepository implements ShippingMetho
 {
     public function __construct()
     {
-        parent::__construct('shipping.shipping_method');
+        parent::__construct(Config::get('shipping.shipping_method'));
     }
 
     public function findByCountry($country)
