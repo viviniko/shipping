@@ -78,7 +78,7 @@ class ShippingServiceProvider extends BaseServiceProvider
     protected function registerShippingService()
     {
         $this->app->singleton(
-            \Viviniko\Shipping\Contracts\ShippingService::class,
+            \Viviniko\Shipping\Services\ShippingService::class,
             \Viviniko\Shipping\Services\ShippingServiceImpl::class
         );
     }
@@ -91,7 +91,7 @@ class ShippingServiceProvider extends BaseServiceProvider
     public function provides()
     {
         return [
-            \Viviniko\Shipping\Contracts\ShippingService::class,
+            \Viviniko\Shipping\Services\ShippingService::class,
         ];
     }
 }
