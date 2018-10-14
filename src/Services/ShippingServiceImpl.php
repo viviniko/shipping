@@ -3,12 +3,11 @@
 namespace Viviniko\Shipping\Services;
 
 use Viviniko\Country\Services\CountryService;
-use Viviniko\Shipping\Contracts\ShippingService as ShippingServiceInterface;
 use Viviniko\Shipping\Repositories\ShippingMethod\ShippingMethodRepository;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 
-class ShippingServiceImpl implements ShippingServiceInterface
+class ShippingServiceImpl implements ShippingService
 {
     protected $shippingMethods;
 
