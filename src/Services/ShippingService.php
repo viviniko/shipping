@@ -14,11 +14,14 @@ interface ShippingService
 
     public function deleteShippingMethod($id);
 
-    public function getShippingCountryMethodsByShippingMethodId($id);
+    public function getShippingCountryMethod($id);
+
+    public function getShippingCountryMethodsByMethodId($id);
 
     public function createShippingCountryMethod(array $data);
 
     public function updateShippingCountryMethod($id, array $data);
 
     public function deleteShippingCountryMethod($id);
+
 }

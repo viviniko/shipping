@@ -14,6 +14,8 @@ interface ShippingCountryMethodRepository
      */
     public function findAllBy($column, $value = null, $columns = ['*']);
 
+    public function find($id);
+
     public function create(array $data);
 
     public function update($id, array $data);

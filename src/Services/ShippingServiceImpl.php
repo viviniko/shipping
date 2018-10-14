@@ -64,7 +64,15 @@ class ShippingServiceImpl implements ShippingService
     /**
      * {@inheritdoc}
      */
-    public function getShippingCountryMethodsByShippingMethodId($id)
+    public function getShippingCountryMethod($id)
+    {
+        return $this->shippingCountryMethods->find($id);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getShippingCountryMethodsByMethodId($id)
     {
         return $this->shippingCountryMethods->findAllBy('method_id', $id);
     }
