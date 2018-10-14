@@ -48,8 +48,8 @@ class CreateShippingTable extends Migration
         Schema::create($this->shippingCountryMethodTable, function (Blueprint $table) {
             $table->increments('id');
             $table->string('group');
-            $table->unsignedInteger('shipping_country_id');
-            $table->unsignedInteger('shipping_method_id');
+            $table->char('country', 3);
+            $table->unsignedInteger('method_id');
             $table->decimal('first_amount', 16, 4);
             $table->decimal('first_weight', 16, 4);
             $table->decimal('step_amount', 16, 4);

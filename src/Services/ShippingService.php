@@ -4,22 +4,21 @@ namespace Viviniko\Shipping\Services;
 
 interface ShippingService
 {
-    /**
-     * Get shipping methods.
-     *
-     * @param $country
-     * @param $weight
-     * @return mixed
-     */
-    public function getShippingMethodsByCountryAndWeight($country, $weight);
+    public function getShippingMethod($id);
 
-    /**
-     * Get shipping amount.
-     *
-     * @param $shippingMethodId
-     * @param $country
-     * @param $weight
-     * @return float
-     */
-    public function getShippingAmount($shippingMethodId, $country, $weight);
+    public function shippingMethods();
+
+    public function createShippingMethod(array $data);
+
+    public function updateShippingMethod($id, array $data);
+
+    public function deleteShippingMethod($id);
+
+    public function getShippingCountryMethodsByShippingMethodId($id);
+
+    public function createShippingCountryMethod(array $data);
+
+    public function updateShippingCountryMethod($id, array $data);
+
+    public function deleteShippingCountryMethod($id);
 }

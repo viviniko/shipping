@@ -4,5 +4,19 @@ namespace Viviniko\Shipping\Repositories\ShippingCountryMethod;
 
 interface ShippingCountryMethodRepository
 {
+    /**
+     * Find data by field and value
+     *
+     * @param $column
+     * @param null $value
+     * @param array $columns
+     * @return \Illuminate\Support\Collection
+     */
+    public function findAllBy($column, $value = null, $columns = ['*']);
 
+    public function create(array $data);
+
+    public function update($id, $data);
+
+    public function delete($id);
 }
