@@ -57,6 +57,7 @@ class ShippingServiceImpl implements ShippingService
      */
     public function deleteShippingMethod($id)
     {
+        throw_if($this->shippingCountryMethods->exists('method_id', $id), new \Exception("The shipping country method is not empty."));
         return $this->shippingMethods->delete($id);
     }
 
