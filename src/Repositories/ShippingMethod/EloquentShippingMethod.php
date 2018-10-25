@@ -15,7 +15,7 @@ class EloquentShippingMethod extends EloquentRepository implements ShippingMetho
     public function findByCountry($country)
     {
         return $this->createQuery()->whereIn('id', function ($query) use ($country) {
-            return $query->select('shipping_method_id')
+            return $query->select('method_id')
                 ->from(Config::get('shipping.shipping_country_method_table'))
                 ->where('country', $country);
         })->get();
