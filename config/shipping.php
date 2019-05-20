@@ -1,11 +1,11 @@
 <?php
 
 return [
-    'shipping_country_method_table' => 'shipping_country_method',
+    'freights_table' => 'shipping_freights',
 
-    'shipping_methods_table' => 'shipping_methods',
+    'methods_table' => 'shipping_methods',
 
-    'shipping_method' => 'Viviniko\Shipping\Models\ShippingMethod',
+    'method' => 'Viviniko\Shipping\Models\Method',
 
-    'shipping_country_method' => 'Viviniko\Shipping\Models\ShippingCountryMethod',
+    'freight' => 'Viviniko\Shipping\Models\Freight',
 ];

@@ -3,21 +3,21 @@
 namespace Viviniko\Shipping\Services;
 
 use Viviniko\Currency\Amount;
-use Viviniko\Shipping\Repositories\ShippingCountryMethod\ShippingCountryMethodRepository;
-use Viviniko\Shipping\Repositories\ShippingMethod\ShippingMethodRepository;
+use Viviniko\Shipping\Repositories\Freight\FreightRepository;
+use Viviniko\Shipping\Repositories\Method\MethodRepository;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 
 class ShippingServiceImpl implements ShippingService
 {
-    protected $shippingMethods;
+    protected $methods;
 
-    protected $shippingCountryMethods;
+    protected $freights;
 
-    public function __construct(ShippingMethodRepository $shippingMethods, ShippingCountryMethodRepository $shippingCountryMethods)
+    public function __construct(MethodRepository $methodRepository, FreightRepository $freightRepository)
     {
-        $this->shippingMethods = $shippingMethods;
-        $this->shippingCountryMethods = $shippingCountryMethods;
+        $this->methods = $methodRepository;
+        $this->freights = $freightRepository;
     }
 
     /**
@@ -25,7 +25,7 @@ class ShippingServiceImpl implements ShippingService
      */
     public function getShippingMethod($id)
     {
-        return $this->shippingMethods->find($id);
+        return $this->methods->find($id);
     }
 
     /**
@@ -33,7 +33,7 @@ class ShippingServiceImpl implements ShippingService
      */
     public function shippingMethods()
     {
-        return $this->shippingMethods->all();
+        return $this->methods->all();
     }
 
     /**
@@ -41,7 +41,7 @@ class ShippingServiceImpl implements ShippingService
      */
     public function createShippingMethod(array $data)
     {
-        return $this->shippingMethods->create($data);
+        return $this->methods->create($data);
     }
 
     /**
@@ -49,7 +49,7 @@ class ShippingServiceImpl implements ShippingService
      */
     public function updateShippingMethod($id, array $data)
     {
-        return $this->shippingMethods->update($id, $data);
+        return $this->methods->update($id, $data);
     }
 
     /**
@@ -57,8 +57,8 @@ class ShippingServiceImpl implements ShippingService
      */
     public function deleteShippingMethod($id)
     {
-        throw_if($this->shippingCountryMethods->exists('method_id', $id), new \Exception("The shipping country method is not empty."));
-        return $this->shippingMethods->delete($id);
+        throw_if($this->freights->exists('method_id', $id), new \Exception("The shipping country method is not empty."));
+        return $this->methods->delete($id);
     }
 
     /**
@@ -66,7 +66,7 @@ class ShippingServiceImpl implements ShippingService
      */
     public function getShippingCountryMethod($id)
     {
-        return $this->shippingCountryMethods->find($id);
+        return $this->freights->find($id);
     }
 
     /**
@@ -74,7 +74,7 @@ class ShippingServiceImpl implements ShippingService
      */
     public function getShippingCountryMethodsByMethodId($id)
     {
-        return $this->shippingCountryMethods->findAllBy('method_id', $id);
+        return $this->freights->findAllBy('method_id', $id);
     }
 
     /**
@@ -82,7 +82,7 @@ class ShippingServiceImpl implements ShippingService
      */
     public function createShippingCountryMethod(array $data)
     {
-        return $this->shippingCountryMethods->create($data);
+        return $this->freights->create($data);
     }
 
     /**
@@ -90,7 +90,7 @@ class ShippingServiceImpl implements ShippingService
      */
     public function updateShippingCountryMethod($id, array $data)
     {
-        return $this->shippingCountryMethods->update($id, $data);
+        return $this->freights->update($id, $data);
     }
 
     /**
@@ -98,7 +98,7 @@ class ShippingServiceImpl implements ShippingService
      */
     public function deleteShippingCountryMethod($id)
     {
-        return $this->shippingCountryMethods->delete($id);
+        return $this->freights->delete($id);
     }
 
     /**
@@ -106,7 +106,7 @@ class ShippingServiceImpl implements ShippingService
      */
     public function getShippingMethodsByCountryAndWeight($country, $weight)
     {
-        return $this->shippingMethods->findByCountry($country)->map(function ($item) use ($country, $weight) {
+        return $this->methods->findAllByCountry($country)->map(function ($item) use ($country, $weight) {
             $item->subtotal = $this->getShippingAmount($item->id, $country, $weight);
 
             return $item;
@@ -123,7 +123,7 @@ class ShippingServiceImpl implements ShippingService
             'country' => $country,
         ])->first();
 
-        $method = $this->shippingMethods->find($shippingMethodId);
+        $method = $this->methods->find($shippingMethodId);
 
         if (!$shippingCountryMethod | !$method) {
             return false;

@@ -10,20 +10,20 @@ class CreateShippingTable extends Migration
     /**
      * @var string
      */
-    protected $shippingMethodsTable;
+    protected $methodsTable;
 
     /**
      * @var string
      */
-    protected $shippingCountryMethodTable;
+    protected $freightsTable;
 
     /**
      * CreateCatalogTable constructor.
      */
     public function __construct()
     {
-        $this->shippingMethodsTable = Config::get('shipping.shipping_methods_table');
-        $this->shippingCountryMethodTable = Config::get('shipping.shipping_country_method_table');
+        $this->methodsTable = (new (Config::get('shipping.method')))->getTable();
+        $this->freightsTable = (new (Config::get('shipping.freight')))->getTable();
     }
 
     /**
@@ -34,7 +34,7 @@ class CreateShippingTable extends Migration
     public function up()
     {
         // Create table for storing shipping methods.
-        Schema::create($this->shippingMethodsTable, function (Blueprint $table) {
+        Schema::create($this->methodsTable, function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('description');
@@ -45,7 +45,7 @@ class CreateShippingTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create($this->shippingCountryMethodTable, function (Blueprint $table) {
+        Schema::create($this->freightsTable, function (Blueprint $table) {
             $table->increments('id');
             $table->string('group');
             $table->char('country', 2);
@@ -66,7 +66,7 @@ class CreateShippingTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists($this->shippingCountryMethodTable);
-        Schema::dropIfExists($this->shippingMethodsTable);
+        Schema::dropIfExists($this->freightsTable);
+        Schema::dropIfExists($this->methodsTable);
     }
 }

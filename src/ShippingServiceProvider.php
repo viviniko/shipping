@@ -61,12 +61,12 @@ class ShippingServiceProvider extends BaseServiceProvider
     protected function registerRepositories()
     {
         $this->app->singleton(
-            \Viviniko\Shipping\Repositories\ShippingMethod\ShippingMethodRepository::class,
-            \Viviniko\Shipping\Repositories\ShippingMethod\EloquentShippingMethod::class
+            \Viviniko\Shipping\Repositories\Method\MethodRepository::class,
+            \Viviniko\Shipping\Repositories\Method\EloquentMethod::class
         );
         $this->app->singleton(
-            \Viviniko\Shipping\Repositories\ShippingCountryMethod\ShippingCountryMethodRepository::class,
-            \Viviniko\Shipping\Repositories\ShippingCountryMethod\EloquentShippingCountryMethod::class
+            \Viviniko\Shipping\Repositories\Freight\FreightRepository::class,
+            \Viviniko\Shipping\Repositories\Freight\EloquentFreight::class
         );
     }
 

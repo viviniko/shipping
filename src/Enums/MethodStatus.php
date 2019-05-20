@@ -2,8 +2,7 @@
 
 namespace Viviniko\Shipping\Enums;
 
-
-class ShippingMethodStatus
+class MethodStatus
 {
     const ACTIVE = 1;
     const BANNED = 0;

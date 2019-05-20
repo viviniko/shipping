@@ -2,11 +2,12 @@
 
 namespace Viviniko\Shipping\Models;
 
+use Illuminate\Support\Facades\Config;
 use Viviniko\Support\Database\Eloquent\Model;
 
-class ShippingCountryMethod extends Model
+class Freight extends Model
 {
-    protected $tableConfigKey = 'shipping.shipping_country_method_table';
+    protected $tableConfigKey = 'shipping.freights_table';
 
     protected $fillable = [
         'group', 'method_id', 'country', 'first_amount', 'first_weight', 'step_amount', 'step_weight', 'extra_amount'
@@ -14,6 +15,6 @@ class ShippingCountryMethod extends Model
 
     public function shippingMethod()
     {
-        return $this->belongsTo(ShippingMethod::class, 'method_id');
+        return $this->belongsTo(Config::get('shipping.method'), 'method_id');
     }
 }

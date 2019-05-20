@@ -1,18 +1,18 @@
 <?php
 
-namespace Viviniko\Shipping\Repositories\ShippingMethod;
+namespace Viviniko\Shipping\Repositories\Method;
 
 use Viviniko\Repository\EloquentRepository;
 use Illuminate\Support\Facades\Config;
 
-class EloquentShippingMethod extends EloquentRepository implements ShippingMethodRepository
+class EloquentMethod extends EloquentRepository implements MethodRepository
 {
     public function __construct()
     {
-        parent::__construct(Config::get('shipping.shipping_method'));
+        parent::__construct(Config::get('shipping.method'));
     }
 
-    public function findByCountry($country)
+    public function findAllByCountry($country)
     {
         return $this->createQuery()->whereIn('id', function ($query) use ($country) {
             return $query->select('method_id')
