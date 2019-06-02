@@ -106,11 +106,14 @@ class ShippingServiceImpl implements ShippingService
      */
     public function getShippingMethodsByCountryAndWeight($country, $weight)
     {
-        return $this->methods->findAllByCountry($country)->map(function ($item) use ($country, $weight) {
-            $item->subtotal = $this->getShippingAmount($item->id, $country, $weight);
+        $freights = $this->freights->findAllBy('country', $country);
 
-            return $item;
-        });
+        return $this->methods->findAllBy('id', $freights->map(function ($freight) { return $freight->id; }))
+            ->map(function ($item) use ($country, $weight) {
+                $item->subtotal = $this->getShippingAmount($item->id, $country, $weight);
+
+                return $item;
+            });
     }
 
     /**

@@ -13,7 +13,7 @@ class Freight extends Model
         'group', 'method_id', 'country', 'first_amount', 'first_weight', 'step_amount', 'step_weight', 'extra_amount'
     ];
 
-    public function shippingMethod()
+    public function method()
     {
         return $this->belongsTo(Config::get('shipping.method'), 'method_id');
     }
