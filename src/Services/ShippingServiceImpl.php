@@ -140,8 +140,8 @@ class ShippingServiceImpl implements ShippingService
 
         $subtotal += $shippingCountryMethod->extra_amount;
 
-        if (!empty($method->discouts)) {
-            $discounts = collect(preg_split('/\s+/', $method->discouts))->mapWithKeys(function ($value, $key) {
+        if (!empty($method->discounts)) {
+            $discounts = collect(preg_split('/\s+/', $method->discounts))->mapWithKeys(function ($value, $key) {
                 $numbers = preg_split('/[^\d]+/', $value);
                 return count($numbers) == 2 ? [$numbers[0] => $numbers[1]] : [];
             })->sortKeys();
