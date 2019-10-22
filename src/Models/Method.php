@@ -10,7 +10,7 @@ class Method extends Model
     protected $tableConfigKey = 'shipping.methods_table';
 
     protected $fillable = [
-        'name', 'description', 'times', 'discount', 'is_active', 'sort'
+        'name', 'description', 'times', 'discounts', 'is_active', 'sort'
     ];
 
     public function freights()

@@ -39,7 +39,7 @@ class CreateShippingTable extends Migration
             $table->string('name');
             $table->string('description');
             $table->string('times');
-            $table->unsignedTinyInteger('discount');
+            $table->string('discounts');
             $table->boolean('is_active')->default(false);
             $table->integer('sort')->default(0);
             $table->timestamps();
