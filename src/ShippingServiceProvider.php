@@ -41,8 +41,6 @@ class ShippingServiceProvider extends BaseServiceProvider
 
         $this->registerRepositories();
 
-        $this->registerShippingService();
-
         $this->registerCommands();
     }
 
@@ -71,19 +69,6 @@ class ShippingServiceProvider extends BaseServiceProvider
     }
 
     /**
-     * Register the shipping service provider.
-     *
-     * @return void
-     */
-    protected function registerShippingService()
-    {
-        $this->app->singleton(
-            \Viviniko\Shipping\Services\ShippingService::class,
-            \Viviniko\Shipping\Services\ShippingServiceImpl::class
-        );
-    }
-
-    /**
      * Get the services provided by the provider.
      *
      * @return array
@@ -91,7 +76,6 @@ class ShippingServiceProvider extends BaseServiceProvider
     public function provides()
     {
         return [
-            \Viviniko\Shipping\Services\ShippingService::class,
         ];
     }
 }
