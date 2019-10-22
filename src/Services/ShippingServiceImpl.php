@@ -2,7 +2,7 @@
 
 namespace Viviniko\Shipping\Services;
 
-use Viviniko\Currency\Amount;
+use Viviniko\Currency\Money;
 use Viviniko\Shipping\Repositories\Freight\FreightRepository;
 use Viviniko\Shipping\Repositories\Method\MethodRepository;
 use Illuminate\Support\Facades\Config;
@@ -151,7 +151,7 @@ class ShippingServiceImpl implements ShippingService
                 break;
             }
         }
-
-        return Amount::createBaseAmount(max(0, $subtotal));
+        
+        return Money::create(max(0, $subtotal));
     }
 }
