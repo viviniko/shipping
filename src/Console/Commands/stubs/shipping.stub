@@ -22,8 +22,8 @@ class CreateShippingTable extends Migration
      */
     public function __construct()
     {
-        $this->methodsTable = (new (Config::get('shipping.method')))->getTable();
-        $this->freightsTable = (new (Config::get('shipping.freight')))->getTable();
+        $this->methodsTable = Config::get("shipping.methods_table");
+        $this->freightsTable = Config::get('shipping.freights_table');
     }
 
     /**
